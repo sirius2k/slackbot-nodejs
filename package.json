@@ -1,0 +1,25 @@
+{
+  "name": "slackbot-nodejs",
+  "version": "1.0.0",
+  "description": "This is a NodeJS project to utilize slackbot API to create Apps in the Slack.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sirius2k/slackbot-nodejs.git"
+  },
+  "author": "Kyoungwook Park",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sirius2k/slackbot-nodejs/issues"
+  },
+  "homepage": "https://github.com/sirius2k/slackbot-nodejs#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-schedule": "^2.0.0",
+    "slack-node": "^0.1.8"
+  }
+}
