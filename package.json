@@ -2,9 +2,9 @@
   "name": "slackbot-nodejs",
   "version": "1.0.0",
   "description": "This is a NodeJS project to utilize slackbot API to create Apps in the Slack.",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon src/app.js",
     "test": "test"
   },
   "repository": {
@@ -21,5 +21,10 @@
     "dotenv": "^8.2.0",
     "node-schedule": "^2.0.0",
     "slack-node": "^0.1.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/node": "^7.12.16",
+    "@babel/preset-env": "^7.12.16"
   }
 }
