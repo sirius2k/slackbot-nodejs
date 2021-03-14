@@ -1,7 +1,8 @@
 const { SlackAdapter } = require('botbuilder-adapter-slack');
 const Slack = require('slack-node')
 const schedule = require('node-schedule')
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const { Botkit } = require('botkit');
 
 dotenv.config()
 
@@ -9,38 +10,42 @@ dotenv.config()
     Example of sending message to specific channel
 */
 const slack = new Slack(`${process.env.BOT_TOKEN}`);
-const send = async(message) => {
+slack.setWebhook(`${process.env.WEBHOOK_URL}`);
+
+const sendByAPI = async(message) => {
     slack.api('chat.postMessage', {
         username: `${process.env.BOT_DISPLAY_NAME}`,
         text: message,
         channel: `${process.env.BOT_TARGET_CHANNEL}`,
         icon_emoji: `${process.env.BOT_ICON_EMOJI}`
     }, function(err, response) {
-        console.log('send error')
+        if (err!=null) console.log('err =' + err)
+
         console.log(response)
     })
 }
 
-send('First message')
+const sendByWebhook = async(message) => {
+    slack.webhook({
+        text: message,
+        attachments:[
+          {
+            fallback: "Link Address: <https://www.google.com|Google>",
+            pretext: "Link Address: <https://www.google.com|Google>",
+            color: "#00FFFF",
+            fields:[
+              {
+                title: "Notice",
+                value: "Please, click the link above.",
+                short:false
+              }
+            ]
+          }
+        ]
+      }, function(err, response){
+        console.log(response);
+      });   
+}
 
-/*
-    Example of reply in BotApp with Botkit
-*/
-const controller = botkit.slackbot({
-    debug: false,
-    log: true
-})
-
-const botScope = [
-    'direct_message',
-    'direct_mention',
-    'menton'
-]
-
-controller.hears(['test'], botScope, (bot, message) => {
-    bot.reply(message, 'test reply message')
-});
-
-controller.spawn({
-    token: `${BOT_TOKEN}`
-}).startRTM();
+sendByAPI('First message by API - slack node')
+sendByWebhook('First message by Webhook')
