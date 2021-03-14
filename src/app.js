@@ -42,9 +42,9 @@ const sendByWebhook = async(message) => {
             ]
           }
         ]
-      }, function(err, response){
+    }, function(err, response){
         console.log(response);
-      });   
+    });   
 }
 
 sendByAPI('First message by API - slack node')
