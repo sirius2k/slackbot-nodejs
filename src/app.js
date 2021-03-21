@@ -3,6 +3,7 @@ const Slack = require('slack-node')
 const schedule = require('node-schedule')
 const dotenv = require('dotenv');
 const { Botkit } = require('botkit');
+const JiraApi = require('jira-client')
 
 dotenv.config()
 
@@ -49,3 +50,18 @@ const sendByWebhook = async(message) => {
 
 sendByAPI('First message by API - slack node')
 sendByWebhook('First message by Webhook')
+
+var jira = new JiraApi({
+  protocol: `${process.env.JIRA_PROTOCOL}`,
+  host: `${process.env.JIRA_HOST}`,
+  username: ``,
+  password: ``,
+  apiVersion: ``,
+  strictSSL: true
+});
+
+var serverInfo = jira.getServerInfo().then(function(serverInfo) {
+  console.log(serverInfo);
+}).catch(function(err) {
+  console.error(err);
+});
