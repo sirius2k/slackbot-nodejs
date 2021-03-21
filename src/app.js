@@ -62,6 +62,8 @@ var jira = new JiraApi({
 
 var serverInfo = jira.getServerInfo().then(function(serverInfo) {
   console.log(serverInfo);
+
+  sendByWebhook(JSON.stringify(severInfo));
 }).catch(function(err) {
   console.error(err);
 });
