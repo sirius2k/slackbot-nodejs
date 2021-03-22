@@ -1,9 +1,10 @@
 const { SlackAdapter } = require('botbuilder-adapter-slack');
-const Slack = require('slack-node')
-const schedule = require('node-schedule')
+const Slack = require('slack-node');
+const schedule = require('node-schedule');
 const dotenv = require('dotenv');
 const { Botkit } = require('botkit');
-const JiraApi = require('jira-client')
+const JiraApi = require('jira-client');
+const util = require('util');
 
 dotenv.config()
 
@@ -63,7 +64,7 @@ var jira = new JiraApi({
 var serverInfo = jira.getServerInfo().then(function(serverInfo) {
   console.log(serverInfo);
 
-  sendByWebhook(JSON.stringify(severInfo));
+  sendByWebhook(JSON.stringify(serverInfo));
 }).catch(function(err) {
   console.error(err);
 });
