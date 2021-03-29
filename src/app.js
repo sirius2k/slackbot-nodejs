@@ -11,15 +11,15 @@ dotenv.config()
 /*
     Example of sending message to specific channel
 */
-const slack = new Slack(`${process.env.BOT_TOKEN}`);
-slack.setWebhook(`${process.env.WEBHOOK_URL}`);
+const slack = new Slack(`${process.env.BOT_TOKEN || 'Input your bot token from slack'}`);
+slack.setWebhook(`${process.env.WEBHOOK_URL || 'Input your webhook url from slack'}`);
 
 const sendByAPI = async(message) => {
     slack.api('chat.postMessage', {
-        username: `${process.env.BOT_DISPLAY_NAME}`,
+        username: `${process.env.BOT_DISPLAY_NAME || 'MyBot Name'}`,
         text: message,
-        channel: `${process.env.BOT_TARGET_CHANNEL}`,
-        icon_emoji: `${process.env.BOT_ICON_EMOJI}`
+        channel: `${process.env.BOT_TARGET_CHANNEL || 'Test Channel'}`,
+        icon_emoji: `${process.env.BOT_ICON_EMOJI || 'slack'}`
     }, function(err, response) {
         if (err!=null) console.log('err =' + err)
 
@@ -53,8 +53,8 @@ sendByAPI('First message by API - slack node')
 sendByWebhook('First message by Webhook')
 
 var jira = new JiraApi({
-  protocol: `${process.env.JIRA_PROTOCOL}`,
-  host: `${process.env.JIRA_HOST}`,
+  protocol: `${process.env.JIRA_PROTOCOL || 'https'}`,
+  host: `${process.env.JIRA_HOST || 'id.atlassian.net'}`,
   username: ``,
   password: ``,
   apiVersion: ``,
